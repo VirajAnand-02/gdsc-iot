@@ -1,45 +1,23 @@
-import { initializeApp, getAuth } from "firebase/app";
-require('dotenv').config();
-const YOUR_API_KEY = process.env.API_KEY;
-const YOUR_AUTH_DOMAIN = process.env.API_URL;
-const YOUR_DATABASE_URL
-const YOUR_PROJECT_ID
-const YOUR_STORAGE_BUCKET
-const YOUR_MESSAGING_SENDER_ID
-const YOUR_APP_ID
-
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+import { get, getDatabase } from "firebase/database";
 
 const firebaseConfig = {
-    apiKey: "YOUR_API_KEY",
-    authDomain: "YOUR_AUTH_DOMAIN",
-    databaseURL: "YOUR_DATABASE_URL",
-    projectId: "YOUR_PROJECT_ID",
-    storageBucket: "YOUR_STORAGE_BUCKET",
-    messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-    appId: "YOUR_APP_ID"
+  apiKey: "AIzaSyCo-DxeMNTue0TWkFRv852juThQfIUTqzg",
+  authDomain: "gdsc-iot-2f969.firebaseapp.com",
+  databaseURL: "https://gdsc-iot-2f969-default-rtdb.firebaseio.com",
+  projectId: "gdsc-iot-2f969",
+  storageBucket: "gdsc-iot-2f969.appspot.com",
+  messagingSenderId: "876280275369",
+  appId: "1:876280275369:web:86934d36d891dc4bb164b8",
+  measurementId: "G-YM7E03T6CN"
 };
-  
-firebase.initializeApp(firebaseConfig);
-const db = firebase.database();
 
-// Replace 'messages' with the name of your data node
-const messagesRef = db.ref('messages');
-messagesRef.on('value', (snapshot) => {
-  const messages = snapshot.val();
-  const table = document.getElementById('messagesTable');
-  table.innerHTML = '';
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
 
-  for (const key in messages) {
-    const message = messages[key];
-    const row = table.insertRow();
+const db = getDatabase();
+const refrence
 
-    const nameCell = row.insertCell();
-    nameCell.textContent = message.name;
 
-    const textCell = row.insertCell();
-    textCell.textContent = message.text;
-
-    const timestampCell = row.insertCell();
-    timestampCell.textContent = new Date(message.timestamp).toLocaleString();
-  }
-});
+const analytics = getAnalytics(app);
