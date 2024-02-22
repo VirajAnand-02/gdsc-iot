@@ -15,3 +15,5 @@ def init_db():
             timestamp TIMESTAMP DEFAULT CURRNET_TIMESTAMP
         )
     ''')
+
+    palnsdknd
