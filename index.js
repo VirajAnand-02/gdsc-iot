@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
-import { get, getDatabase } from "firebase/database";
+import { get, getDatabase, set, ref } from "firebase/database";
 
 const firebaseConfig = {
   apiKey: "AIzaSyCo-DxeMNTue0TWkFRv852juThQfIUTqzg",
@@ -16,8 +16,18 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
-const db = getDatabase();
-const refrence
+function writeUserData(userID, name, email, imageUrl){
+    const db = getDatabase();
+    const refrence = ref(db, 'user/' + userID);
+    set(refrence, {
+        username: name, 
+        email: email, 
+        profile_picture: imageUrl
+    })
+}
+
+writeUserData("sahjhgghjkh", "kdhbfkds", "email@emial.com", "url_for _image");
+writeUserData("sahjhsdfdsfgghjkh", "kdhbsdffkds", "emdsfsdfail@emial.com", "url_dsfdfor _image");
 
 
 const analytics = getAnalytics(app);
