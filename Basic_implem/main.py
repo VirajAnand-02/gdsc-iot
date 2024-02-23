@@ -37,7 +37,7 @@ def newLocation():
     except:
         return "invalid data format"
     
-    insert_location(location, value=0)
+    insert_location(location, timestamp)
     print("location", location)
     print("timestamp", timestamp)
     return jsonify({"data": "ok"})
