@@ -4,12 +4,12 @@ import sqlite3
 
 db_file = 'database.db'
 
-def update_val(id, val):
+def update_val(location, val):
     conn = sqlite3.connect(db_file)
     cursor = conn.cursor()
     cursor.execute('''
-        UPDATE Data SET value = ? WHERE id = ?
-    ''', (val,id))
+        UPDATE Data SET value = ? WHERE location = ?
+    ''', (val,location))
 
 def insert_location(location, value):
     conn = sqlite3.connect(db_file)
