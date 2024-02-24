@@ -10,7 +10,7 @@ init_db()
  
 @app.route('/')
 def hello():
-    return render_template()
+    return render_template('index.html')
 
 @app.route('/data_update', methods=['POST'])
 def data_update():
@@ -27,6 +27,12 @@ def data_update():
         
     except:
         return "invalid data format"
+    
+    
+@app.route('/get-data', methods = ['POST'])
+def get_data():
+    data = get_from_database()
+    return jsonify(data)
 
 
 if __name__ == '__main__':

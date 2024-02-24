@@ -26,6 +26,17 @@ def insert_or_update_location(location, value):
         conn.commit()
         conn.close()
         return None  # Return None if the entry was updated
+    
+def get_from_database():
+    conn = sqlite3.connect(db_file)
+    cursor = conn.cursor()
+    # Check if the location already exists
+    cursor.execute("SELECT location, value FROM Data")
+    data = cursor.fetchall()
+    if data is None:
+        return None 
+    else:
+        return data 
 
 def init_db():
     conn = sqlite3.connect(db_file)
