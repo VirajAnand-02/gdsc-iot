@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template
 import asyncio
 import aiosqlite
 
@@ -10,7 +10,7 @@ init_db()
  
 @app.route('/')
 def hello():
-    return 'Hello, World!'
+    return render_template()
 
 @app.route('/data_update', methods=['POST'])
 def data_update():
@@ -20,29 +20,13 @@ def data_update():
         json_data = request.get_json()
         location = json_data.get('location')
         value = json_data.get('value')
+        ret = insert_or_update_location(location, value)
+        if ret:
+            return jsonify({"data":"created new entry", "id": ret})
+        return jsonify({"data":"entry updated"})
+        
     except:
         return "invalid data format"
-    
-    update_val(location, value)
-    return jsonify({"data": "ok"})
-     
-@app.route('/newLocation', methods=['POST'])
-def newLocation():
-    if request.method == 'GET':
-        return "invalid request type", 500
-    try:
-        json_data = request.get_json()
-        location = json_data.get('location')
-        timestamp = json_data.get('timestamp')
-    except:
-        return "invalid data format"
-    
-    insert_location(location, timestamp)
-    print("location", location)
-    print("timestamp", timestamp)
-    return jsonify({"data": "ok"})
-
-
 
 
 if __name__ == '__main__':
